@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="">
+    <div class="col-sm-6">
+        <h3>{{ post.title }}</h3>
+    </div>
+    <div class="row gx-5">
+        <img src="{{url_for('static', filename='post_pictures/'+post.post_picture)}}" alt="Card image cap" style="width: 800px;height: 450px;">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">{{ post.content }}</div>
+    </div>
+    <form method="post"  action="{{ url_for('create_comment', post_id=post.id) }}" style=" border: 2px solid black;">
+        <div class="container-sm justify-content-start">
+            <div class="mb-3">
+                <label for="content" class="col-md-2 col-form-label">Enter a comment:</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="content" id="content"  placeholder="comment">
+                </div>
+            </div>
+        </div>
+    </form>
+    {% for comment in post.comments %}
+        <p style=" border: 2px solid black;"> {{comment.content}}</p>
+    {% endfor%}
+      
+</div>
+  
+{% endblock %} 
